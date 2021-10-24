@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import "./SignUp.css";
+import { reducer } from "../reducer/Index";
+import { SignupCredential } from "../action/Index";
 
 function SignUp(props) {
   const selector = useSelector((state) => state.reducer);
@@ -14,8 +16,17 @@ function SignUp(props) {
   let errorsObj = { name: "", email: "", password: "" };
   const [errors, setErrors] = useState(errorsObj);
 
-  function onSignUp(e) {
+  const onSignUp = (e) => {
     e.preventDefault();
+    dispatch(
+      SignupCredential({
+        name: name,
+        email: email,
+        password: password,
+        loggedIn: true,
+      })
+    );
+
     let error = false;
     const errorObj = { ...errorsObj };
     if (name === "") {
@@ -38,13 +49,13 @@ function SignUp(props) {
     if (!error) {
       console.log("form submit");
     }
-  }
+  };
 
   return (
     <div className="signup">
       {/* <h1 className="signup">{selector.email} Sign Up</h1> */}
 
-      <form className="signup_form" onSubmit={onSignUp}>
+      <form className="signup_form" onSubmit={(e) => onSignUp(e)}>
         <div className="name_input">
           <label>
             <b>Name</b>
