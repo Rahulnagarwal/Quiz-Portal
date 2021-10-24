@@ -1,23 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import { createContext } from "react";
+import "./App.css";
+import { Provider } from "react-redux";
+import Approutes from "./routes/Approutes";
+import Course from "./components/Courses";
+import FormByClass, { SignUp } from "./components/SignUp";
+
+import { storeforCredentials } from "./store/store";
+import YoutubeForm from "./components/YoutubeForm";
+
+export const Data = createContext(null);
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {/* <YoutubeForm /> */}
+      <Provider store={storeforCredentials}>
+        {/* <Data.Provider value="Rahul"> */}
+        {/* <Course /> */}
+        <Approutes />
+        {/* </Data.Provider> */}
+      </Provider>
     </div>
   );
 }
